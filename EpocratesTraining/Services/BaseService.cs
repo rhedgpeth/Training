@@ -18,12 +18,12 @@ namespace EpocratesTraining.Services
 			client = CreateNativeHttpClient();
 		}
 
-		protected Task<T> GetAsync<T>(string requestUri)
+		protected Task<T> GetAsync<T>(string requestUri, Func<JToken, JToken> filter = null)
 		{
-			return SendAsync<T>(RequestType.Get, requestUri);
+			return SendAsync<T>(RequestType.Get, requestUri, filter);
 		}
 
-		async Task<T> SendAsync<T>(RequestType requestType, string requestUri, string jsonRequest = null)
+		async Task<T> SendAsync<T>(RequestType requestType, string requestUri, Func<JToken, JToken> filter, string jsonRequest = null)
 		{
 			HttpContent content = null;
 
@@ -61,11 +61,22 @@ namespace EpocratesTraining.Services
 				string json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
 
 				if (!string.IsNullOrEmpty(json))
-					return JToken.Parse(json).ToObject<T>(); ;
+					return Deserialize<T>(json, filter);
 			}
 
 			return default(T);
 		} 
+
+		protected T Deserialize<T>(string json, Func<JToken, JToken> filter)
+		{
+			var token = JToken.Parse(json);
+
+			token = filter?.Invoke(token) ?? token;
+
+			var obj = token.ToObject<T>();
+
+			return obj;
+		}
 	}
 }
 
