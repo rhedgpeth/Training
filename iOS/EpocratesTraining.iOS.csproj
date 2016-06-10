@@ -114,11 +114,19 @@
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
-    <Compile Include="ViewController.cs" />
-    <Compile Include="ViewController.designer.cs">
-      <DependentUpon>ViewController.cs</DependentUpon>
-    </Compile>
     <Compile Include="Platform\Services\BaseService.cs" />
+    <Compile Include="RootViewController.cs" />
+    <Compile Include="RootViewController.designer.cs">
+      <DependentUpon>RootViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataTableViewController.cs" />
+    <Compile Include="DataTableViewController.designer.cs">
+      <DependentUpon>DataTableViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataTableView.cs" />
+    <Compile Include="DataTableView.designer.cs">
+      <DependentUpon>DataTableView.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <Import Project="..\EpocratesTraining\EpocratesTraining.projitems" Label="Shared" Condition="Exists('..\EpocratesTraining\EpocratesTraining.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
