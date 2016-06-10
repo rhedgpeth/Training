@@ -34,12 +34,14 @@ namespace EpocratesTraining.iOS
 
 		async void SmallSongsListButton_TouchUpInside(object sender, EventArgs e)
 		{
+			isBusyIndicator.StartAnimating();
 			var songs = await SongService.Instance.GetSmallSongsList();
 			ShowSongCount(songs?.Count ?? 0);
 		}
 
 		async void LargeSongsListButton_TouchUpInside(object sender, EventArgs e)
 		{
+			isBusyIndicator.StartAnimating();
 			var songs = await SongService.Instance.GetLargeSongsList();
 			ShowSongCount(songs?.Count ?? 0);
 		}
@@ -47,6 +49,7 @@ namespace EpocratesTraining.iOS
 		void ShowSongCount(int count)
 		{
 			Message.ShowSimpleMessage(this, "Songs Received", $"{count} received!");
+			isBusyIndicator.StopAnimating();
 		}
 
 		void CrossConnectivity_Current_ConnectivityChanged(object sender, Plugin.Connectivity.Abstractions.ConnectivityChangedEventArgs e)

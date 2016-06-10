@@ -10,9 +10,12 @@ using EpocratesTraining.Services;
 
 namespace EpocratesTraining.Droid
 {
+	
+
 	[Activity(Label = "Epocrates Training", MainLauncher = true, Icon = "@mipmap/icon")]
 	public class MainActivity : Activity
 	{
+		ProgressDialog progressDialog;
 		Button smallSongListButton;
 		Button largeSongListButton;
 
@@ -49,19 +52,38 @@ namespace EpocratesTraining.Droid
 
 		async void smallSongListButton_Click(object sender, EventArgs e)
 		{
+			startProgressIndicator();
 			var songs = await SongService.Instance.GetSmallSongsList();
 			ShowSongCount(songs?.Count ?? 0);
 		}
 
 		async void largeSongListButton_Click(object sender, EventArgs e)
 		{
+			startProgressIndicator();
 			var songs = await SongService.Instance.GetLargeSongsList();
 			ShowSongCount(songs?.Count ?? 0);
 		}
 
+		void startProgressIndicator()
+		{
+			progressDialog = new ProgressDialog(this);
+			progressDialog.SetMessage("Retrieving data...");
+			progressDialog.Show();
+			progressDialog.SetCanceledOnTouchOutside(false);
+			progressDialog.SetCancelable(false);
+		}
+
+		void stopProgressIndicator()
+		{
+			if (progressDialog.IsShowing)
+				progressDialog.Dismiss();
+		}
+
 		void ShowSongCount(int count)
 		{
+			stopProgressIndicator();
 			Message.ShowSimpleMessage(this, "Songs Received", $"{count} received!");
+
 		}
 
 		void CrossConnectivity_Current_ConnectivityChanged(object sender, Plugin.Connectivity.Abstractions.ConnectivityChangedEventArgs e)

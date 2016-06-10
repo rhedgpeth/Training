@@ -30,6 +30,12 @@
                                 </state>
                                 <connections/>
                             </button>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="37" hidesWhenStopped="YES" hidden="YES">
+                                <rect key="frame" x="178" y="438" width="20" height="20"/>
+                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="178" y="438" width="20" height="20"/>
+                                </variation>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -39,10 +45,21 @@
                             <constraint id="32" firstItem="3" firstAttribute="leading" secondItem="oBE-Ac-vcx" secondAttribute="leading"/>
                             <constraint id="33" firstItem="3" firstAttribute="trailing" secondItem="oBE-Ac-vcx" secondAttribute="trailing"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="37"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="37"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="smallSongsListButton" destination="oBE-Ac-vcx" id="name-outlet-oBE-Ac-vcx"/>
                         <outlet property="largeSongsListButton" destination="3" id="name-outlet-3"/>
+                        <outlet property="isBusyIndicator" destination="37" id="name-outlet-37"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -50,4 +67,7 @@
             <point key="canvasLocation" x="0.0" y="0.0"/>
         </scene>
     </scenes>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedScreenMetrics key="destination" type="retina47"/>
+    </simulatedMetricsContainer>
 </document>

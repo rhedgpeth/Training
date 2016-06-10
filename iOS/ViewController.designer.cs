@@ -19,6 +19,10 @@ namespace EpocratesTraining.iOS
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UIActivityIndicatorView isBusyIndicator { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UIButton largeSongsListButton { get; set; }
 
         [Outlet]
@@ -27,6 +31,11 @@ namespace EpocratesTraining.iOS
 
         void ReleaseDesignerOutlets ()
         {
+            if (isBusyIndicator != null) {
+                isBusyIndicator.Dispose ();
+                isBusyIndicator = null;
+            }
+
             if (largeSongsListButton != null) {
                 largeSongsListButton.Dispose ();
                 largeSongsListButton = null;
