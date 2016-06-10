@@ -3,6 +3,8 @@ using Android.App;
 using Android.Widget;
 using Android.OS;
 
+using Plugin.Connectivity;
+
 using EpocratesTraining.Models;
 using EpocratesTraining.Services;
 
@@ -11,8 +13,6 @@ namespace EpocratesTraining.Droid
 	[Activity(Label = "Epocrates Training", MainLauncher = true, Icon = "@mipmap/icon")]
 	public class MainActivity : Activity
 	{
-		AlertDialog.Builder alert;
-
 		Button smallSongListButton;
 		Button largeSongListButton;
 
@@ -31,6 +31,8 @@ namespace EpocratesTraining.Droid
 		{
 			base.OnResume();
 
+			CrossConnectivity.Current.ConnectivityChanged += CrossConnectivity_Current_ConnectivityChanged;
+
 			smallSongListButton.Click += smallSongListButton_Click;
 			largeSongListButton.Click += largeSongListButton_Click;
 		}
@@ -38,6 +40,8 @@ namespace EpocratesTraining.Droid
 		protected override void OnPause()
 		{
 			base.OnPause();
+
+			CrossConnectivity.Current.ConnectivityChanged -= CrossConnectivity_Current_ConnectivityChanged;
 
 			smallSongListButton.Click -= smallSongListButton_Click;
 			largeSongListButton.Click -= largeSongListButton_Click;
@@ -57,19 +61,12 @@ namespace EpocratesTraining.Droid
 
 		void ShowSongCount(int count)
 		{
-			if (alert == null)
-			{
-				alert = new AlertDialog.Builder(this);
-				alert.SetTitle("Songs Received");
-				alert.SetPositiveButton("OK", (senderAlert, args) => { });
-			}
+			Message.ShowSimpleMessage(this, "Songs Received", $"{count} received!");
+		}
 
-			alert.SetMessage($"{count} received!");
-
-			RunOnUiThread(() =>
-			{
-				alert.Show();
-			});
+		void CrossConnectivity_Current_ConnectivityChanged(object sender, Plugin.Connectivity.Abstractions.ConnectivityChangedEventArgs e)
+		{
+			Message.ShowSimpleMessage(this, "Connection Event Detected", $"Connected: {e.IsConnected}");
 		}
 	}
 }

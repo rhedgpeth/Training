@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Threading.Tasks;
-
 using UIKit;
 
-using EpocratesTraining.Models;
+using Plugin.Connectivity;
+
 using EpocratesTraining.Services;
 
 namespace EpocratesTraining.iOS
@@ -17,6 +16,8 @@ namespace EpocratesTraining.iOS
 		{
 			base.ViewDidLoad();
 
+			CrossConnectivity.Current.ConnectivityChanged += CrossConnectivity_Current_ConnectivityChanged;
+
 			smallSongsListButton.TouchUpInside += SmallSongsListButton_TouchUpInside;
 			largeSongsListButton.TouchUpInside += LargeSongsListButton_TouchUpInside;
 		}
@@ -24,6 +25,8 @@ namespace EpocratesTraining.iOS
 		public override void ViewDidUnload()
 		{
 			base.ViewDidUnload();
+
+			CrossConnectivity.Current.ConnectivityChanged -= CrossConnectivity_Current_ConnectivityChanged;
 
 			smallSongsListButton.TouchUpInside -= SmallSongsListButton_TouchUpInside;
 			largeSongsListButton.TouchUpInside -= LargeSongsListButton_TouchUpInside;
@@ -43,12 +46,12 @@ namespace EpocratesTraining.iOS
 
 		void ShowSongCount(int count)
 		{
-			InvokeOnMainThread(() =>
-			{
-				var alert = UIAlertController.Create("Songs Received", $"{count} received!", UIAlertControllerStyle.Alert);
-				alert.AddAction(UIAlertAction.Create("Ok", UIAlertActionStyle.Cancel, null));
-				PresentViewController(alert, true, null);
-			});
+			Message.ShowSimpleMessage(this, "Songs Received", $"{count} received!");
+		}
+
+		void CrossConnectivity_Current_ConnectivityChanged(object sender, Plugin.Connectivity.Abstractions.ConnectivityChangedEventArgs e)
+		{
+			Message.ShowSimpleMessage(this, "Connection Event Detected", $"Connected: {e.IsConnected}");
 		}
 
 		public override void DidReceiveMemoryWarning()

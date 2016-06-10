@@ -2,8 +2,8 @@
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Text;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Plugin.Connectivity;
 
 namespace EpocratesTraining.Services
 {
@@ -52,13 +52,19 @@ namespace EpocratesTraining.Services
 					throw new Exception("Not a valid request type");
 			}
 
-			var response = await httpTask.ConfigureAwait(false);
+			if (CrossConnectivity.Current.IsConnected)
+			{
+				var response = await httpTask.ConfigureAwait(false);
 
-			response.EnsureSuccessStatusCode();
+				response.EnsureSuccessStatusCode();
 
-			string json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+				string json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
 
-			return JToken.Parse(json).ToObject<T>(); ;
+				if (!string.IsNullOrEmpty(json))
+					return JToken.Parse(json).ToObject<T>(); ;
+			}
+
+			return default(T);
 		} 
 	}
 }
