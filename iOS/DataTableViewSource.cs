@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Collections.Generic;
 using Foundation;
@@ -8,6 +9,10 @@ using EpocratesTraining.Models;
 
 namespace EpocratesTraining.iOS
 {
+	public class DataCell : UITableViewCell
+	{
+	}
+
 	public class DataTableSource : UITableViewSource
 	{
 		ForecastDay[] tableItems;
@@ -26,13 +31,23 @@ namespace EpocratesTraining.iOS
 		public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
 		{
 			UITableViewCell cell = tableView.DequeueReusableCell(CellIdentifier);
-			var item = tableItems[indexPath.Row];
 
 			//---- if there are no cells to reuse, create a new one
 			if (cell == null)
-			{ cell = new UITableViewCell(UITableViewCellStyle.Default, CellIdentifier); }
+			{
+				cell = new UITableViewCell(UITableViewCellStyle.Default, CellIdentifier);
+			}
 
-			cell.TextLabel.Text = item.Title;
+			var item = tableItems[indexPath.Row];
+
+			var iconUri = new Uri(item.IconUrl);
+			var documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+			var localPath = Path.Combine(documentsPath, iconUri.Segments.Last());
+			var image = UIImage.FromFile(localPath);
+
+			cell.ImageView.Image = image;
+
+			cell.TextLabel.Text = String.Format("{0} {1}", item.Title, item.Description);
 
 			return cell;
 		}
