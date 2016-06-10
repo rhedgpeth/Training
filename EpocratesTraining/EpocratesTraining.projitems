@@ -18,5 +18,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\Song.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\SongService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)App\Message.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\WeatherService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\ForecastDay.cs" />
   </ItemGroup>
 </Project>
