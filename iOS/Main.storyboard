@@ -106,7 +106,9 @@
                             <constraint id="1764" firstItem="1719" firstAttribute="height" secondItem="61" secondAttribute="height"/>
                         </constraints>
                     </view>
-                    <connections/>
+                    <connections>
+                        <outlet property="DataTable" destination="1719" id="name-outlet-1719"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="62" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

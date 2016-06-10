@@ -127,6 +127,7 @@
     <Compile Include="DataTableView.designer.cs">
       <DependentUpon>DataTableView.cs</DependentUpon>
     </Compile>
+    <Compile Include="DataTableViewSource.cs" />
   </ItemGroup>
   <Import Project="..\EpocratesTraining\EpocratesTraining.projitems" Label="Shared" Condition="Exists('..\EpocratesTraining\EpocratesTraining.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
