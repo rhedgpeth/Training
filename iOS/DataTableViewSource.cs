@@ -2,10 +2,13 @@
 using System.IO;
 using System.Linq;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Foundation;
 using UIKit;
 
 using EpocratesTraining.Models;
+using FFImageLoading;
+//using EpocratesTraining.Services;
 
 namespace EpocratesTraining.iOS
 {
@@ -14,17 +17,19 @@ namespace EpocratesTraining.iOS
 
 	public class DataTableSource : UITableViewSource
 	{
-		ForecastDay[] tableItems;
-		string CellIdentifier = "TheItem";
+		public Action<int> ImageLoaded { get; set; }
 
-		public DataTableSource(IEnumerable<ForecastDay> items)
+		List<ForecastDay> items;
+		string CellIdentifier = "MyCell";
+
+		public DataTableSource(List<ForecastDay> items)
 		{
-			tableItems = items.ToArray();
+			this.items = items;
 		}
 
 		public override nint RowsInSection(UITableView tableview, nint section)
 		{
-			return tableItems.Length;
+			return items.Count;
 		}
 
 		public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
@@ -33,19 +38,22 @@ namespace EpocratesTraining.iOS
 
 			// If there are no cells to reuse, create a new one
 			if (cell == null)
-				cell = new UITableViewCell(UITableViewCellStyle.Default, CellIdentifier);
+				cell = new UITableViewCell(UITableViewCellStyle.Subtitle, CellIdentifier);
 
-			var item = tableItems[indexPath.Row];
+			var item = items[indexPath.Row];
 
-			var iconUri = new Uri(item.IconUrl);
-			var documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-			var localPath = Path.Combine(documentsPath, iconUri.Segments.Last());
-			var image = UIImage.FromFile(localPath);
+			if (item != null)
+			{
+				cell.ImageView.Tag = indexPath.Row;
 
-			cell.ImageView.Image = image;
-
-			cell.TextLabel.Text = String.Format("{0}", item.Title);
-
+				ImageService.Instance.LoadUrl(item.IconUrl)
+				            //.Success(() => { ImageLoaded(indexPath.Row); })
+				            .Into(cell.ImageView as UIImageView);
+				
+				cell.TextLabel.Text = item.Title;
+				cell.DetailTextLabel.Text = item.Description;
+			}
+		
 			return cell;
 		}
 	}

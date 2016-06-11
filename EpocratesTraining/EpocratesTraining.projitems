@@ -20,7 +20,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)App\Message.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\WeatherService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\ForecastDay.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Services\ImageService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Image.cs" />
   </ItemGroup>
 </Project>

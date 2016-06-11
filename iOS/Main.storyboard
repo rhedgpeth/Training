@@ -13,48 +13,12 @@
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="46" kind="relationship" relationship="rootViewController" id="45"/>
+                        <segue id="4851" destination="60" kind="relationship" relationship="rootViewController"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="48" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-464" y="-66"/>
-        </scene>
-        <scene sceneID="49">
-            <objects>
-                <viewController id="46" sceneMemberID="viewController" customClass="RootViewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="41"/>
-                        <viewControllerLayoutGuide type="bottom" id="42"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="51">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="64" translatesAutoresizingMaskIntoConstraints="NO">
-                                <rect key="frame" x="123.5" y="318.5" width="128" height="30"/>
-                                <state key="normal" title="Get SF Ten Day">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue id="1717" destination="60" kind="show"/>
-                                </connections>
-                                <constraints>
-                                    <constraint id="1741" firstAttribute="width" constant="128"/>
-                                </constraints>
-                            </button>
-                        </subviews>
-                        <constraints>
-                            <constraint id="1750" firstItem="51" firstAttribute="centerY" secondItem="64" secondAttribute="centerY"/>
-                            <constraint id="1752" firstItem="64" firstAttribute="centerX" secondItem="51" secondAttribute="centerX"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="50" title="Weather - Main Page"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="52" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="70" y="-66"/>
+            <point key="canvasLocation" x="-369" y="-34"/>
         </scene>
         <scene sceneID="59">
             <objects>
@@ -68,20 +32,33 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="1719" translatesAutoresizingMaskIntoConstraints="NO" customClass="DataTableView">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="1719" translatesAutoresizingMaskIntoConstraints="NO" customClass="DataTableView" misplaced="YES">
+                                <rect key="frame" x="0.0" y="-33" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="3513" rowHeight="44" reuseIdentifier="TheItem">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="4857" rowHeight="44" reuseIdentifier="MyCell" style="IBUITableViewCellStyleSubtitle" textLabel="4887" detailTextLabel="4888">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3513" id="3514">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4857" id="4858">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4887">
+                                                    <rect key="frame" x="15" y="4" width="35.5" height="21.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4888">
+                                                    <rect key="frame" x="15" y="25.5" width="44" height="14.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <segue id="4811" destination="1773" kind="show"/>
-                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -96,6 +73,7 @@
                     <connections>
                         <outlet property="DataTable" destination="1719" id="name-outlet-1719"/>
                     </connections>
+                    <navigationItem title="10 Day Weather" id="4850" key="navigationItem"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="62" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

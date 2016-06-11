@@ -11,6 +11,8 @@ namespace EpocratesTraining.iOS
 {
     public partial class DataTableViewController : UIViewController
     {
+		DataTableSource dataSource;
+
         public DataTableViewController (IntPtr handle) : base (handle)
         {
         }
@@ -23,8 +25,21 @@ namespace EpocratesTraining.iOS
 
 			var forcastDays = await weatherService.Get10DayForecast();
 
-			DataTable.Source = new DataTableSource(forcastDays);
+			dataSource = new DataTableSource(forcastDays);
+			dataSource.ImageLoaded = ReloadRow;
+
+			DataTable.Source = dataSource;
 			DataTable.ReloadData();
+		}
+
+		void ReloadRow(int row)
+		{
+			NSIndexPath[] rowsToReload = new NSIndexPath[] 
+			{
+				NSIndexPath.FromRowSection(row, 0) // points to second row in the first section of the model
+			};
+
+			DataTable.ReloadRows(rowsToReload, UITableViewRowAnimation.None);
 		}
     }
 }

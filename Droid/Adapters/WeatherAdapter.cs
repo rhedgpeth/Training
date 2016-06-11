@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-
 using Android.Content;
-using Android.Graphics;
-using Android.Graphics.Drawables;
 using Android.Views;
 using Android.Widget;
 
 using EpocratesTraining.Models;
-using EpocratesTraining.Services;
+using FFImageLoading;
+using FFImageLoading.Views;
 
 namespace EpocratesTraining.Droid
 {
@@ -39,24 +36,14 @@ namespace EpocratesTraining.Droid
 
 			if (item != null)
 			{
-				var iconImage = convertView.FindViewById<ImageView>(Resource.Id.iconImage);
+				var iconImage = convertView.FindViewById<ImageViewAsync>(Resource.Id.iconImage);
 				var titleText = convertView.FindViewById<TextView>(Resource.Id.titleText);
 				var descriptionText = convertView.FindViewById<TextView>(Resource.Id.descriptionText);
 
 				titleText.Text = item.Title;
 				descriptionText.Text = item.Description;
 
-				Task.Run(async () =>
-				{
-					var result = await ImageService.Instance.GetImageData(item.IconUrl).ConfigureAwait(false);
-
-					if (result != null && result.Bytes != null)
-					{
-						var bitmap = await BitmapFactory.DecodeByteArrayAsync(result.Bytes, 0, result.Bytes.Length);
-						var drawable = new BitmapDrawable(context.Resources, bitmap);
-						iconImage.SetImageDrawable(drawable);
-					}
-				});
+				ImageService.Instance.LoadUrl(item.IconUrl).IntoAsync(iconImage);
 			}
 
 			return convertView;
