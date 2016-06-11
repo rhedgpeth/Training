@@ -10,8 +10,7 @@ using EpocratesTraining.Models;
 namespace EpocratesTraining.iOS
 {
 	public class DataCell : UITableViewCell
-	{
-	}
+	{ }
 
 	public class DataTableSource : UITableViewSource
 	{
@@ -32,11 +31,9 @@ namespace EpocratesTraining.iOS
 		{
 			UITableViewCell cell = tableView.DequeueReusableCell(CellIdentifier);
 
-			//---- if there are no cells to reuse, create a new one
+			// If there are no cells to reuse, create a new one
 			if (cell == null)
-			{
 				cell = new UITableViewCell(UITableViewCellStyle.Default, CellIdentifier);
-			}
 
 			var item = tableItems[indexPath.Row];
 

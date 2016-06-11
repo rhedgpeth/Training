@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 using EpocratesTraining.Models;
 
-namespace EpocratesTraining
+namespace EpocratesTraining.Services
 {
-	public class ImageService
+	public class ImageService : BaseService
 	{
-		readonly HttpClient _client = new HttpClient();
+		//readonly HttpClient _client = new HttpClient();
 
 		static readonly ImageService instance = new ImageService();
 
@@ -20,14 +20,14 @@ namespace EpocratesTraining
 		}
 
 		public ImageService()
-		{
-		}
+		{ }
 
 		public async Task<ImageData> GetImageData(string url)
 		{
 			var uri = new Uri(url);
-			var result = await _client.GetAsync(uri).ConfigureAwait(false);
+			var result = await client.GetAsync(uri).ConfigureAwait(false);
 			var bytes = await result.Content.ReadAsByteArrayAsync().ConfigureAwait(false);
+
 			return new ImageData(uri.Segments.Last(), bytes);
 		}
 	}

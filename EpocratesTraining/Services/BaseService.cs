@@ -25,11 +25,8 @@ namespace EpocratesTraining.Services
 
 		async Task<T> SendAsync<T>(RequestType requestType, string requestUri, Func<JToken, JToken> filter, string jsonRequest = null)
 		{
-			HttpContent content = null;
-
-			if (jsonRequest != null)
-				content = new StringContent(jsonRequest, Encoding.UTF8, "application/json");
-
+			//HttpContent content = !string.IsNullOrEmpty(jsonRequest) ? new StringContent(jsonRequest, Encoding.UTF8, "application/json") : null;
+	
 			Task<HttpResponseMessage> httpTask;
 
 			switch (requestType)

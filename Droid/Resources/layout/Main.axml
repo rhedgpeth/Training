@@ -2,15 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <Button
-        android:id="@+id/smallSongListButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Get Small Song List" />
-    <Button
-        android:id="@+id/largeSongLightButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Get Large Song List" />
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+    <ListView
+        android:id="@+id/weatherList"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
 </LinearLayout>

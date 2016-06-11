@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
 using Android.App;
 using Android.Widget;
 using Android.OS;
@@ -7,17 +10,16 @@ using Plugin.Connectivity;
 
 using EpocratesTraining.Models;
 using EpocratesTraining.Services;
+using Android.Content;
 
 namespace EpocratesTraining.Droid
 {
-	
-
 	[Activity(Label = "Epocrates Training", MainLauncher = true, Icon = "@mipmap/icon")]
 	public class MainActivity : Activity
 	{
 		ProgressDialog progressDialog;
-		Button smallSongListButton;
-		Button largeSongListButton;
+		ListView listView;
+		List<ForecastDay> forecastDays;
 
 		protected override void OnCreate(Bundle savedInstanceState)
 		{
@@ -26,45 +28,50 @@ namespace EpocratesTraining.Droid
 			// Set our view from the "main" layout resource
 			SetContentView(Resource.Layout.Main);
 
-			smallSongListButton = FindViewById<Button>(Resource.Id.smallSongListButton);
-			largeSongListButton = FindViewById<Button>(Resource.Id.largeSongLightButton);
+			StartProgressIndicator();
+
+			listView = FindViewById<ListView>(Resource.Id.weatherList);
+			listView.ItemClick += (object sender, AdapterView.ItemClickEventArgs e) =>
+			{
+				var forecastDay = forecastDays[e.Position];
+
+				if (forecastDay != null)
+				{
+					var intent = new Intent(this, typeof(DetailsActivity));
+					intent.PutExtra("forecast_day_title", forecastDay.Title);
+					intent.PutExtra("forecast_day_description", forecastDay.Description);
+					StartActivity(intent);
+				}
+			};
+
+			Task.Run(async () =>
+			{
+				forecastDays = await WeatherService.Instance.Get10DayForecast();
+
+				if (forecastDays != null)
+				{
+					RunOnUiThread(() =>
+					{
+						listView.Adapter = new WeatherAdapter(this, forecastDays);
+						StopProgressIndicator();
+					});
+				}
+			});
 		}
 
 		protected override void OnResume()
 		{
 			base.OnResume();
-
 			CrossConnectivity.Current.ConnectivityChanged += CrossConnectivity_Current_ConnectivityChanged;
-
-			smallSongListButton.Click += smallSongListButton_Click;
-			largeSongListButton.Click += largeSongListButton_Click;
 		}
 
 		protected override void OnPause()
 		{
 			base.OnPause();
-
 			CrossConnectivity.Current.ConnectivityChanged -= CrossConnectivity_Current_ConnectivityChanged;
-
-			smallSongListButton.Click -= smallSongListButton_Click;
-			largeSongListButton.Click -= largeSongListButton_Click;
 		}
 
-		async void smallSongListButton_Click(object sender, EventArgs e)
-		{
-			startProgressIndicator();
-			var songs = await SongService.Instance.GetSmallSongsList();
-			ShowSongCount(songs?.Count ?? 0);
-		}
-
-		async void largeSongListButton_Click(object sender, EventArgs e)
-		{
-			startProgressIndicator();
-			var songs = await SongService.Instance.GetLargeSongsList();
-			ShowSongCount(songs?.Count ?? 0);
-		}
-
-		void startProgressIndicator()
+		void StartProgressIndicator()
 		{
 			progressDialog = new ProgressDialog(this);
 			progressDialog.SetMessage("Retrieving data...");
@@ -73,7 +80,7 @@ namespace EpocratesTraining.Droid
 			progressDialog.SetCancelable(false);
 		}
 
-		void stopProgressIndicator()
+		void StopProgressIndicator()
 		{
 			if (progressDialog.IsShowing)
 				progressDialog.Dismiss();
@@ -81,9 +88,8 @@ namespace EpocratesTraining.Droid
 
 		void ShowSongCount(int count)
 		{
-			stopProgressIndicator();
+			StopProgressIndicator();
 			Message.ShowSimpleMessage(this, "Songs Received", $"{count} received!");
-
 		}
 
 		void CrossConnectivity_Current_ConnectivityChanged(object sender, Plugin.Connectivity.Abstractions.ConnectivityChangedEventArgs e)
