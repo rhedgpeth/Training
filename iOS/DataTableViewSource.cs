@@ -16,7 +16,7 @@ namespace EpocratesTraining.iOS
 	public class DataTableSource : UITableViewSource
 	{
 		ForecastDay[] tableItems;
-		string CellIdentifier = "TableCell";
+		string CellIdentifier = "TheItem";
 
 		public DataTableSource(IEnumerable<ForecastDay> items)
 		{
@@ -47,7 +47,7 @@ namespace EpocratesTraining.iOS
 
 			cell.ImageView.Image = image;
 
-			cell.TextLabel.Text = String.Format("{0} {1}", item.Title, item.Description);
+			cell.TextLabel.Text = String.Format("{0}", item.Title);
 
 			return cell;
 		}

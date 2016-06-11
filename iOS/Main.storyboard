@@ -34,7 +34,7 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="64" translatesAutoresizingMaskIntoConstraints="NO">
                                 <rect key="frame" x="123.5" y="318.5" width="128" height="30"/>
-                                <state key="normal" title="Get Data">
+                                <state key="normal" title="Get SF Ten Day">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -58,7 +58,7 @@
         </scene>
         <scene sceneID="59">
             <objects>
-                <viewController id="60" sceneMemberID="viewController" customClass="DataTableViewController">
+                <viewController id="60" sceneMemberID="viewController" customClass="DataTableViewController" title="SF Ten Day">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="57"/>
                         <viewControllerLayoutGuide type="bottom" id="58"/>
@@ -72,29 +72,16 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="1720" rowHeight="44">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="3513" rowHeight="44" reuseIdentifier="TheItem">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1720" id="1721">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3513" id="3514">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="1722" rowHeight="44">
-                                        <rect key="frame" x="0.0" y="72" width="375" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1722" id="1723">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="1724" rowHeight="48">
-                                        <rect key="frame" x="0.0" y="116" width="375" height="48"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1724" id="1725">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="47.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue id="4811" destination="1773" kind="show"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -113,6 +100,23 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="62" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="463" y="-68"/>
+        </scene>
+        <scene sceneID="1772">
+            <objects>
+                <viewController id="1773" sceneMemberID="viewController" customClass="DataItemViewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="1770"/>
+                        <viewControllerLayoutGuide type="bottom" id="1771"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="1774">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1775" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="855" y="-68"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

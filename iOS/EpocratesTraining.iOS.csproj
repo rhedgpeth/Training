@@ -128,6 +128,10 @@
       <DependentUpon>DataTableView.cs</DependentUpon>
     </Compile>
     <Compile Include="DataTableViewSource.cs" />
+    <Compile Include="DataItemViewController.cs" />
+    <Compile Include="DataItemViewController.designer.cs">
+      <DependentUpon>DataItemViewController.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <Import Project="..\EpocratesTraining\EpocratesTraining.projitems" Label="Shared" Condition="Exists('..\EpocratesTraining\EpocratesTraining.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
