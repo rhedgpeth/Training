@@ -14,8 +14,7 @@ namespace EpocratesTraining.iOS
 		DataTableSource dataSource;
 
         public DataTableViewController (IntPtr handle) : base (handle)
-        {
-        }
+        { }
 
 		public async override void ViewDidLoad()
 		{

@@ -25,6 +25,11 @@ namespace EpocratesTraining.Services
 		{
 			return GetAsync<List<ForecastDay>>("forecast10day/q/CA/San_Francisco.json", x => x["forecast"]["txt_forecast"]["forecastday"]);
 		}
+
+		public Task<CurrentObservation> GetCurrentConditions()
+		{
+			return GetAsync<CurrentObservation>("conditions/q/CA/San_Francisco.json", x => x["current_observation"]);
+		}
 	}
 }
 

@@ -12,7 +12,6 @@ namespace EpocratesTraining.Droid
 {
 	public class WeatherAdapter : BaseAdapter<ForecastDay>
 	{
-		Context context;
 		LayoutInflater inflator;
 		List<ForecastDay> items;
 
@@ -22,7 +21,6 @@ namespace EpocratesTraining.Droid
 
 		public WeatherAdapter(Context context, List<ForecastDay> items)
 		{
-			this.context = context;
 			inflator = context.GetSystemService(Context.LayoutInflaterService) as LayoutInflater;
 			this.items = items;
 		}

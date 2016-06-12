@@ -18,8 +18,10 @@ namespace EpocratesTraining.Droid
 	public class MainActivity : Activity
 	{
 		ProgressDialog progressDialog;
-		ListView listView;
-		List<ForecastDay> forecastDays;
+
+		CurrentConditionsFragment currentConditionsFragment;
+		RadarFragment radarFragment;
+		TenDayFragment tenDayFragment;
 
 		protected override void OnCreate(Bundle savedInstanceState)
 		{
@@ -28,35 +30,44 @@ namespace EpocratesTraining.Droid
 			// Set our view from the "main" layout resource
 			SetContentView(Resource.Layout.Main);
 
-			StartProgressIndicator();
+			currentConditionsFragment = new CurrentConditionsFragment();
+			FragmentTransaction transaction = this.FragmentManager.BeginTransaction();
+			transaction.Add(Resource.Id.mainContent, currentConditionsFragment, "CurrentFragment");
+			transaction.CommitAllowingStateLoss();
 
-			listView = FindViewById<ListView>(Resource.Id.weatherList);
-			listView.ItemClick += (object sender, AdapterView.ItemClickEventArgs e) =>
+			var currentConditionsButton = FindViewById<Button>(Resource.Id.currentConditionsButton);
+			currentConditionsButton.Click += (sender, e) =>
 			{
-				var forecastDay = forecastDays[e.Position];
+				if (currentConditionsFragment == null)
+					currentConditionsFragment = new CurrentConditionsFragment();
 
-				if (forecastDay != null)
-				{
-					var intent = new Intent(this, typeof(DetailsActivity));
-					intent.PutExtra("forecast_day_title", forecastDay.Title);
-					intent.PutExtra("forecast_day_description", forecastDay.Description);
-					StartActivity(intent);
-				}
+				PushRootFragment(currentConditionsFragment);
 			};
 
-			Task.Run(async () =>
+			var radarButton = FindViewById<Button>(Resource.Id.radarButton);
+			radarButton.Click += (sender, e) =>
 			{
-				forecastDays = await WeatherService.Instance.Get10DayForecast();
+				if (radarFragment == null)
+					radarFragment = new RadarFragment();
 
-				if (forecastDays != null)
-				{
-					RunOnUiThread(() =>
-					{
-						listView.Adapter = new WeatherAdapter(this, forecastDays);
-						StopProgressIndicator();
-					});
-				}
-			});
+				PushRootFragment(radarFragment);
+			};
+
+			var tenDayForecastButton = FindViewById<Button>(Resource.Id.tenDayButton);
+			tenDayForecastButton.Click += (sender, e) =>
+			{
+				if (tenDayFragment == null)
+					tenDayFragment = new TenDayFragment();
+
+				PushRootFragment(tenDayFragment);
+			};
+		}
+
+		void PushRootFragment(Fragment frag)
+		{
+			FragmentTransaction transaction = this.FragmentManager.BeginTransaction();
+			transaction.Replace(Resource.Id.mainContent, frag);
+			transaction.CommitAllowingStateLoss();
 		}
 
 		protected override void OnResume()
@@ -84,12 +95,6 @@ namespace EpocratesTraining.Droid
 		{
 			if (progressDialog.IsShowing)
 				progressDialog.Dismiss();
-		}
-
-		void ShowSongCount(int count)
-		{
-			StopProgressIndicator();
-			Message.ShowSimpleMessage(this, "Songs Received", $"{count} received!");
 		}
 
 		void CrossConnectivity_Current_ConnectivityChanged(object sender, Plugin.Connectivity.Abstractions.ConnectivityChangedEventArgs e)

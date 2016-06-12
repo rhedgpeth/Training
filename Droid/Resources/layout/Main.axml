@@ -4,8 +4,35 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white">
-    <ListView
-        android:id="@+id/weatherList"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent" />
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/currentConditionsButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:text="Current Conditions" />
+            <Button
+                android:id="@+id/radarButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:text="Radar" />
+            <Button
+                android:id="@+id/tenDayButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:text="10 Day Forecast" />
+        </LinearLayout>
+    </HorizontalScrollView>
+    <FrameLayout
+        android:id="@+id/mainContent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 </LinearLayout>

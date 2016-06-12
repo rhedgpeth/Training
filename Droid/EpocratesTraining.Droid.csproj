@@ -64,7 +64,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Platform\Services\BaseService.cs" />
     <Compile Include="Adapters\WeatherAdapter.cs" />
-    <Compile Include="DetailsActivity.cs" />
+    <Compile Include="WebViewActivity.cs" />
+    <Compile Include="Fragments\CurrentConditionsFragment.cs" />
+    <Compile Include="Fragments\RadarFragment.cs" />
+    <Compile Include="Fragments\TenDayFragment.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -81,12 +84,15 @@
     <AndroidResource Include="Resources\mipmap-xxhdpi\Icon.png" />
     <AndroidResource Include="Resources\mipmap-xxxhdpi\Icon.png" />
     <AndroidResource Include="Resources\layout\WeatherRowItem.axml" />
-    <AndroidResource Include="Resources\layout\Details.axml" />
+    <AndroidResource Include="Resources\layout\CurrentConditionsFragment.axml" />
+    <AndroidResource Include="Resources\layout\RadarFragment.axml" />
+    <AndroidResource Include="Resources\layout\TenDayFragment.axml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Platform\" />
     <Folder Include="Platform\Services\" />
     <Folder Include="Adapters\" />
+    <Folder Include="Fragments\" />
   </ItemGroup>
   <Import Project="..\EpocratesTraining\EpocratesTraining.projitems" Label="Shared" Condition="Exists('..\EpocratesTraining\EpocratesTraining.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
