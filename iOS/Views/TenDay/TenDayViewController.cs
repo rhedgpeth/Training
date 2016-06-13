@@ -20,16 +20,19 @@ namespace EpocratesTraining.iOS
 		{
 			base.ViewDidLoad();
 
+			var loadingOverlay = new LoadingOverlay(UIScreen.MainScreen.Bounds);
+			Add(loadingOverlay);
+
 			var weatherService = WeatherService.Instance;
 
 			var forcastDays = await weatherService.Get10DayForecast();
 
 			dataSource = new TenDayTableViewSource(forcastDays);
-			AutomaticallyAdjustsScrollViewInsets = false;
 
-			TenDayTableView.TableHeaderView = null;
 			TenDayTableView.Source = dataSource;
 			TenDayTableView.ReloadData();
+
+			loadingOverlay.Hide();
 		}
 
 		void ReloadRow(int row)

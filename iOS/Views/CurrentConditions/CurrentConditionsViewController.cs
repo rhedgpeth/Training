@@ -13,8 +13,8 @@ namespace EpocratesTraining.iOS
 {
 	public partial class CurrentConditionsViewController : UIViewController
 	{
-		UIView subView;
 		UITableView tableView;
+		WeakReference<LoadingOverlay> weakLoadingOverlay;
 
 		public CurrentConditionsViewController(IntPtr handle) : base(handle)
 		{ }
@@ -36,6 +36,9 @@ namespace EpocratesTraining.iOS
 
 			View.AddSubview(tableView);
 
+			var loadingOverlay = new LoadingOverlay(UIScreen.MainScreen.Bounds);
+			Add(loadingOverlay);
+
 			Task.Run(async () =>
 			{
 				var currentConditions = await WeatherService.Instance.GetCurrentConditions();
@@ -54,8 +57,6 @@ namespace EpocratesTraining.iOS
 						var label = new UILabel(new CGRect(52, 0, displayWidth - 52, 50));
 						label.Text = currentConditions.Weather;
 
-						//subView.AddSubview(label);
-
 						var items = new List<Tuple<string, string>>();
 						items.Add(new Tuple<string, string>("Current conditions: ", currentConditions.Weather));
 						items.Add(new Tuple<string, string>("Temperature: ", currentConditions.Temperature));
@@ -65,6 +66,11 @@ namespace EpocratesTraining.iOS
 						tableView.ReloadData();
 					});
 				}
+
+				InvokeOnMainThread(() =>
+				{
+					loadingOverlay.Hide();
+				});
 			});
 		}
 

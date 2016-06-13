@@ -47,11 +47,17 @@
                                         <connections/>
                                     </tableViewCell>
                                 </prototypes>
+                                <constraints>
+                                    <constraint id="5557" firstAttribute="width" constant="375"/>
+                                    <constraint id="5558" firstAttribute="height" constant="619"/>
+                                </constraints>
                             </tableView>
                         </subviews>
                         <constraints>
                             <constraint id="5534" firstItem="1719" firstAttribute="width" secondItem="61" secondAttribute="width"/>
                             <constraint id="5544" firstItem="1719" firstAttribute="height" secondItem="61" secondAttribute="height" constant="-48"/>
+                            <constraint id="5555" firstItem="1719" firstAttribute="top" secondItem="61" secondAttribute="top"/>
+                            <constraint id="5556" firstItem="61" firstAttribute="trailing" secondItem="1719" secondAttribute="trailing"/>
                         </constraints>
                     </view>
                     <connections>
