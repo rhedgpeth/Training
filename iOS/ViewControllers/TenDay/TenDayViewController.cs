@@ -25,8 +25,9 @@ namespace EpocratesTraining.iOS
 			var forcastDays = await weatherService.Get10DayForecast();
 
 			dataSource = new TenDayTableViewSource(forcastDays);
-			dataSource.ImageLoaded = ReloadRow;
+			AutomaticallyAdjustsScrollViewInsets = false;
 
+			TenDayTableView.TableHeaderView = null;
 			TenDayTableView.Source = dataSource;
 			TenDayTableView.ReloadData();
 		}

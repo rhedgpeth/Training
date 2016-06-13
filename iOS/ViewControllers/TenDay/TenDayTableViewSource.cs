@@ -10,8 +10,6 @@ namespace EpocratesTraining.iOS
 {
 	public class TenDayTableViewSource : UITableViewSource
 	{
-		public Action<int> ImageLoaded { get; set; }
-
 		List<ForecastDay> items;
 		string CellIdentifier = "MyCell";
 
@@ -40,7 +38,6 @@ namespace EpocratesTraining.iOS
 				cell.ImageView.Tag = indexPath.Row;
 
 				ImageService.Instance.LoadUrl(item.IconUrl)
-				            //.Success(() => { ImageLoaded(indexPath.Row); })
 				            .Into(cell.ImageView as UIImageView);
 				
 				cell.TextLabel.Text = item.Title;

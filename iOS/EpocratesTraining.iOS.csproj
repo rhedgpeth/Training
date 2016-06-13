@@ -146,10 +146,6 @@
     <Compile Include="ViewControllers\Radar\WebViewViewController.designer.cs">
       <DependentUpon>WebViewViewController.cs</DependentUpon>
     </Compile>
-    <Compile Include="ViewControllers\TenDay\TenDayDetailViewController.cs" />
-    <Compile Include="ViewControllers\TenDay\TenDayDetailViewController.designer.cs">
-      <DependentUpon>TenDayDetailViewController.cs</DependentUpon>
-    </Compile>
   </ItemGroup>
   <Import Project="..\EpocratesTraining\EpocratesTraining.projitems" Label="Shared" Condition="Exists('..\EpocratesTraining\EpocratesTraining.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
