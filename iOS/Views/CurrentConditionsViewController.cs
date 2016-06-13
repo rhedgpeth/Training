@@ -57,6 +57,11 @@ namespace EpocratesTraining.iOS
 						items.Add(new Tuple<string, string>("Current conditions: ", currentConditions.Weather));
 						items.Add(new Tuple<string, string>("Temperature: ", currentConditions.Temperature));
 						items.Add(new Tuple<string, string>("Feels like: ", currentConditions.FeelsLike));
+						items.Add(new Tuple<string, string>("Wind: ", currentConditions.WindDescription));
+						items.Add(new Tuple<string, string>("Wind Chill: ", currentConditions.Windchill));
+						items.Add(new Tuple<string, string>("Humidity: ", currentConditions.RelativeHumidity));
+						items.Add(new Tuple<string, string>("Dewpoint: ", currentConditions.Dewpoint));
+						items.Add(new Tuple<string, string>("Heat Index: ", currentConditions.HeatIndex));
 
 						tableView.Source = new CurrentConditionsTableSource(items);
 						tableView.ReloadData();
