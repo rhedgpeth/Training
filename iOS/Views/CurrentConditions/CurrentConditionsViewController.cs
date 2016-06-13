@@ -14,7 +14,6 @@ namespace EpocratesTraining.iOS
 	public partial class CurrentConditionsViewController : UIViewController
 	{
 		UITableView tableView;
-		WeakReference<LoadingOverlay> weakLoadingOverlay;
 
 		public CurrentConditionsViewController(IntPtr handle) : base(handle)
 		{ }
