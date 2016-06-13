@@ -33,6 +33,8 @@ namespace EpocratesTraining.Droid
 		{
 			view = inflater.Inflate(Resource.Layout.CurrentConditionsFragment, container, false);
 
+			((MainActivity)this.Activity).StartProgressIndicator();
+
 			Task.Run(async () =>
 			{
 				if (currentConditions == null)
@@ -55,6 +57,8 @@ namespace EpocratesTraining.Droid
 						view.FindViewById<TextView>(Resource.Id.heatIndexText).Text = currentConditions.HeatIndex;
 					});
 				}
+
+				((MainActivity)this.Activity).StopProgressIndicator();
 			});
 
 			return view;

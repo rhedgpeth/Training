@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Akavache;
 using EpocratesTraining.Models;
+using System.Reactive.Linq;
 
 namespace EpocratesTraining.Services
 {
@@ -24,6 +26,13 @@ namespace EpocratesTraining.Services
 		public Task<List<ForecastDay>> Get10DayForecast()
 		{
 			return GetAsync<List<ForecastDay>>("forecast10day/q/CA/San_Francisco.json", x => x["forecast"]["txt_forecast"]["forecastday"]);
+		}
+
+		public async Task<List<ForecastDay>> Get10DayForecastCached()
+		{
+			return await BlobCache.LocalMachine.GetOrFetchObject("10DayForecast",
+																 async () => await Get10DayForecast(),
+			                                                     new DateTimeOffset(DateTime.Now.AddDays(1)));
 		}
 
 		public Task<CurrentObservation> GetCurrentConditions()

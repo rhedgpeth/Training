@@ -1,27 +1,28 @@
 ﻿using System;
 using System.Threading.Tasks;
 using UIKit;
-
-using EpocratesTraining.Models;
 using EpocratesTraining.Services;
 using CoreGraphics;
 using Foundation;
-using FFImageLoading;
 using System.Collections.Generic;
+using FFImageLoading;
 
 namespace EpocratesTraining.iOS
 {
+	public abstract class BaseViewController : UIViewController
+	{
+
+	}
+
 	public partial class CurrentConditionsViewController : UIViewController
 	{
 		UITableView tableView;
 
-		public CurrentConditionsViewController(IntPtr handle) : base(handle)
+		public CurrentConditionsViewController() : base("CurrentConditionsViewController", null)
 		{ }
 
 		public override void ViewDidLoad()
 		{
-			Title = "Current Conditions";
-
 			base.ViewDidLoad();
 			// Perform any additional setup after loading the view, typically from a nib.
 
@@ -49,9 +50,9 @@ namespace EpocratesTraining.iOS
 						var imageView = new UIImageView(new CGRect((displayWidth / 2) - 24,
 						                                           statusBarHeight + 35, 48, 48));
 
-						View.AddSubview(imageView);
+						ImageService.Instance.LoadUrl(currentConditions.IconUrl).Into(imageView);
 
-						ImageService.Instance.LoadUrl(currentConditions.IconUrl).IntoAsync(imageView);
+						View.AddSubview(imageView);
 
 						var label = new UILabel(new CGRect(52, 0, displayWidth - 52, 50));
 						label.Text = currentConditions.Weather;
@@ -63,13 +64,10 @@ namespace EpocratesTraining.iOS
 
 						tableView.Source = new CurrentConditionsTableSource(items);
 						tableView.ReloadData();
+
+						loadingOverlay.Hide();
 					});
 				}
-
-				InvokeOnMainThread(() =>
-				{
-					loadingOverlay.Hide();
-				});
 			});
 		}
 
@@ -130,7 +128,6 @@ namespace EpocratesTraining.iOS
 			LeftValue.Font = UIFont.BoldSystemFontOfSize(12f);
 
 			RightValue = new UILabel(new CGRect(columnSize, 0, columnSize, 50));
-			//RightValue.AlignmentRectInsets = new UIEdgeInsets(0, 8, 0, 0);
 
 			AddSubview(LeftValue);
 			AddSubview(RightValue);

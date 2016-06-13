@@ -4,15 +4,10 @@ using UIKit;
 
 namespace EpocratesTraining.iOS
 {
-	public partial class WebViewViewController : UIViewController
+	public partial class RadarViewController : UIViewController
 	{
-		public WebViewViewController(IntPtr handle) : base(handle)
-		{ }
-
 		public override void ViewDidLoad()
 		{
-			Title = "Radar";
-
 			base.ViewDidLoad();
 
 			// Perform any additional setup after loading the view, typically from a nib.

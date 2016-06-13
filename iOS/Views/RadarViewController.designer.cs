@@ -11,8 +11,8 @@ using UIKit;
 
 namespace EpocratesTraining.iOS
 {
-    [Register ("WebViewViewController")]
-    partial class WebViewViewController
+    [Register ("RadarViewController")]
+    partial class RadarViewController
     {
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]

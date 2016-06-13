@@ -30,6 +30,8 @@ namespace EpocratesTraining.Droid
 		{
 			var view = inflater.Inflate(Resource.Layout.TenDayFragment, container, false);
 
+			((MainActivity)this.Activity).StartProgressIndicator();
+
 			listView = view.FindViewById<ListView>(Resource.Id.weatherList);
 			listView.ItemClick += (object sender, AdapterView.ItemClickEventArgs e) =>
 			{
@@ -43,7 +45,7 @@ namespace EpocratesTraining.Droid
 
 			Task.Run(async () =>
 			{
-				forecastDays = await WeatherService.Instance.Get10DayForecast();
+				forecastDays = await WeatherService.Instance.Get10DayForecastCached();
 
 				if (forecastDays != null)
 				{
@@ -53,6 +55,8 @@ namespace EpocratesTraining.Droid
 						//StopProgressIndicator();
 					});
 				}
+
+				((MainActivity)this.Activity).StopProgressIndicator();
 			});
 
 			return view;

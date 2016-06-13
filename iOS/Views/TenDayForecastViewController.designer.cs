@@ -11,18 +11,18 @@ using UIKit;
 
 namespace EpocratesTraining.iOS
 {
-    [Register ("TenDayViewController")]
-    partial class TenDayViewController
+    [Register ("TenDayForecastViewController")]
+    partial class TenDayForecastViewController
     {
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UITableView TenDayTableView { get; set; }
+        UIKit.UITableView tableView { get; set; }
 
         void ReleaseDesignerOutlets ()
         {
-            if (TenDayTableView != null) {
-                TenDayTableView.Dispose ();
-                TenDayTableView = null;
+            if (tableView != null) {
+                tableView.Dispose ();
+                tableView = null;
             }
         }
     }

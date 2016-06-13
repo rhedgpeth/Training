@@ -1,16 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-
-using Android.App;
+﻿using Android.App;
 using Android.Widget;
 using Android.OS;
-
 using Plugin.Connectivity;
-
-using EpocratesTraining.Models;
-using EpocratesTraining.Services;
-using Android.Content;
+using Akavache;
 
 namespace EpocratesTraining.Droid
 {
@@ -18,7 +10,6 @@ namespace EpocratesTraining.Droid
 	public class MainActivity : Activity
 	{
 		ProgressDialog progressDialog;
-
 		CurrentConditionsFragment currentConditionsFragment;
 		RadarFragment radarFragment;
 		TenDayFragment tenDayFragment;
@@ -27,13 +18,16 @@ namespace EpocratesTraining.Droid
 		{
 			base.OnCreate(savedInstanceState);
 
+			BlobCache.ApplicationName = "WeatherApp";
+
 			// Set our view from the "main" layout resource
 			SetContentView(Resource.Layout.Main);
 
-			currentConditionsFragment = new CurrentConditionsFragment();
-			FragmentTransaction transaction = this.FragmentManager.BeginTransaction();
+			PushRootFragment(currentConditionsFragment = new CurrentConditionsFragment());
+
+			/*FragmentTransaction transaction = this.FragmentManager.BeginTransaction();
 			transaction.Add(Resource.Id.mainContent, currentConditionsFragment, "CurrentFragment");
-			transaction.CommitAllowingStateLoss();
+			transaction.CommitAllowingStateLoss();*/
 
 			var currentConditionsButton = FindViewById<Button>(Resource.Id.currentConditionsButton);
 			currentConditionsButton.Click += (sender, e) =>
@@ -82,7 +76,7 @@ namespace EpocratesTraining.Droid
 			CrossConnectivity.Current.ConnectivityChanged -= CrossConnectivity_Current_ConnectivityChanged;
 		}
 
-		void StartProgressIndicator()
+		public void StartProgressIndicator()
 		{
 			progressDialog = new ProgressDialog(this);
 			progressDialog.SetMessage("Retrieving data...");
@@ -91,7 +85,7 @@ namespace EpocratesTraining.Droid
 			progressDialog.SetCancelable(false);
 		}
 
-		void StopProgressIndicator()
+		public void StopProgressIndicator()
 		{
 			if (progressDialog.IsShowing)
 				progressDialog.Dismiss();
