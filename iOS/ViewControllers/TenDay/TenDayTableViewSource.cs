@@ -1,28 +1,21 @@
 ﻿using System;
-using System.IO;
-using System.Linq;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using Foundation;
 using UIKit;
 
 using EpocratesTraining.Models;
 using FFImageLoading;
-//using EpocratesTraining.Services;
 
 namespace EpocratesTraining.iOS
 {
-	public class DataCell : UITableViewCell
-	{ }
-
-	public class DataTableSource : UITableViewSource
+	public class TenDayTableViewSource : UITableViewSource
 	{
 		public Action<int> ImageLoaded { get; set; }
 
 		List<ForecastDay> items;
 		string CellIdentifier = "MyCell";
 
-		public DataTableSource(List<ForecastDay> items)
+		public TenDayTableViewSource(List<ForecastDay> items)
 		{
 			this.items = items;
 		}

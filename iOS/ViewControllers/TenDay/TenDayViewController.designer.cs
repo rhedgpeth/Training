@@ -11,18 +11,18 @@ using UIKit;
 
 namespace EpocratesTraining.iOS
 {
-    [Register ("DataTableViewController")]
-    partial class DataTableViewController
+    [Register ("TenDayViewController")]
+    partial class TenDayViewController
     {
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        EpocratesTraining.iOS.DataTableView DataTable { get; set; }
+        UIKit.UITableView TenDayTableView { get; set; }
 
         void ReleaseDesignerOutlets ()
         {
-            if (DataTable != null) {
-                DataTable.Dispose ();
-                DataTable = null;
+            if (TenDayTableView != null) {
+                TenDayTableView.Dispose ();
+                TenDayTableView = null;
             }
         }
     }

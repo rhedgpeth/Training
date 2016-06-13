@@ -110,11 +110,15 @@
     <Folder Include="Resources\" />
     <Folder Include="Platform\" />
     <Folder Include="Platform\Services\" />
+    <Folder Include="ViewControllers\" />
+    <Folder Include="ViewControllers\TenDay\" />
+    <Folder Include="ViewControllers\CurrentConditions\" />
+    <Folder Include="ViewControllers\Radar\" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="LaunchScreen.storyboard" />
     <InterfaceDefinition Include="Main.storyboard" />
-    <InterfaceDefinition Include="CurrentConditionsViewController.xib" />
+    <InterfaceDefinition Include="ViewControllers\CurrentConditions\CurrentConditionsViewController.xib" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -125,30 +129,26 @@
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
     <Compile Include="Platform\Services\BaseService.cs" />
-    <Compile Include="DataTableViewController.cs" />
-    <Compile Include="DataTableViewController.designer.cs">
-      <DependentUpon>DataTableViewController.cs</DependentUpon>
-    </Compile>
-    <Compile Include="DataTableView.cs" />
-    <Compile Include="DataTableView.designer.cs">
-      <DependentUpon>DataTableView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="DataTableViewSource.cs" />
-    <Compile Include="DataItemViewController.cs" />
-    <Compile Include="DataItemViewController.designer.cs">
-      <DependentUpon>DataItemViewController.cs</DependentUpon>
-    </Compile>
-    <Compile Include="MainViewController.cs" />
-    <Compile Include="MainViewController.designer.cs">
+    <Compile Include="ViewControllers\MainViewController.cs" />
+    <Compile Include="ViewControllers\MainViewController.designer.cs">
       <DependentUpon>MainViewController.cs</DependentUpon>
     </Compile>
-    <Compile Include="WebViewViewController.cs" />
-    <Compile Include="WebViewViewController.designer.cs">
+    <Compile Include="ViewControllers\TenDay\TenDayViewController.cs" />
+    <Compile Include="ViewControllers\TenDay\TenDayViewController.designer.cs">
+      <DependentUpon>TenDayViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewControllers\TenDay\TenDayTableViewSource.cs" />
+    <Compile Include="ViewControllers\CurrentConditions\CurrentConditionsViewController.cs" />
+    <Compile Include="ViewControllers\CurrentConditions\CurrentConditionsViewController.designer.cs">
+      <DependentUpon>CurrentConditionsViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewControllers\Radar\WebViewViewController.cs" />
+    <Compile Include="ViewControllers\Radar\WebViewViewController.designer.cs">
       <DependentUpon>WebViewViewController.cs</DependentUpon>
     </Compile>
-    <Compile Include="CurrentConditionsViewController.cs" />
-    <Compile Include="CurrentConditionsViewController.designer.cs">
-      <DependentUpon>CurrentConditionsViewController.cs</DependentUpon>
+    <Compile Include="ViewControllers\TenDay\TenDayDetailViewController.cs" />
+    <Compile Include="ViewControllers\TenDay\TenDayDetailViewController.designer.cs">
+      <DependentUpon>TenDayDetailViewController.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <Import Project="..\EpocratesTraining\EpocratesTraining.projitems" Label="Shared" Condition="Exists('..\EpocratesTraining\EpocratesTraining.projitems')" />

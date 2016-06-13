@@ -9,11 +9,11 @@ using EpocratesTraining.Services;
 
 namespace EpocratesTraining.iOS
 {
-    public partial class DataTableViewController : UIViewController
+    public partial class TenDayViewController : UIViewController
     {
-		DataTableSource dataSource;
+		TenDayTableViewSource dataSource;
 
-        public DataTableViewController (IntPtr handle) : base (handle)
+        public TenDayViewController (IntPtr handle) : base (handle)
         { }
 
 		public async override void ViewDidLoad()
@@ -24,11 +24,11 @@ namespace EpocratesTraining.iOS
 
 			var forcastDays = await weatherService.Get10DayForecast();
 
-			dataSource = new DataTableSource(forcastDays);
+			dataSource = new TenDayTableViewSource(forcastDays);
 			dataSource.ImageLoaded = ReloadRow;
 
-			DataTable.Source = dataSource;
-			DataTable.ReloadData();
+			TenDayTableView.Source = dataSource;
+			TenDayTableView.ReloadData();
 		}
 
 		void ReloadRow(int row)
@@ -38,7 +38,7 @@ namespace EpocratesTraining.iOS
 				NSIndexPath.FromRowSection(row, 0) // points to second row in the first section of the model
 			};
 
-			DataTable.ReloadRows(rowsToReload, UITableViewRowAnimation.None);
+			TenDayTableView.ReloadRows(rowsToReload, UITableViewRowAnimation.None);
 		}
     }
 }

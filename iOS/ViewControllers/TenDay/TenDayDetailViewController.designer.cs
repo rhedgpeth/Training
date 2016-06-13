@@ -11,8 +11,8 @@ using UIKit;
 
 namespace EpocratesTraining.iOS
 {
-    [Register ("DataTableView")]
-    partial class DataTableView
+    [Register ("TenDayDetailViewController")]
+    partial class TenDayDetailViewController
     {
         void ReleaseDesignerOutlets ()
         {
