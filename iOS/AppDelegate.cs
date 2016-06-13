@@ -21,10 +21,7 @@ namespace EpocratesTraining.iOS
 			// create a new window instance based on the screen size
 			Window = new UIWindow(UIScreen.MainScreen.Bounds);
 
-			var navController = new UINavigationController(new MainViewController());
-			navController.Title = "Awesome Weather App";
-
-			Window.RootViewController = navController;
+			Window.RootViewController = new UINavigationController(new MainViewController());
 
 			// make the window visible
 			Window.MakeKeyAndVisible();

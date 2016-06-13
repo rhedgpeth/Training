@@ -1,5 +1,6 @@
 ﻿using System;
-
+using EpocratesTraining.Services;
+using Plugin.Connectivity;
 using UIKit;
 
 namespace EpocratesTraining.iOS
@@ -10,6 +11,7 @@ namespace EpocratesTraining.iOS
 
 		public MainViewController() : base("MainViewController", null)
 		{
+			Title = "Awesome Weather App";
 		}
 
 		public override void ViewDidLoad()
@@ -27,6 +29,23 @@ namespace EpocratesTraining.iOS
 			};
 
 			ViewControllers = tabs;
+		}
+
+		public override void ViewWillAppear(bool animated)
+		{
+			base.ViewWillAppear(animated);
+			CrossConnectivity.Current.ConnectivityChanged += CrossConnectivity_Current_ConnectivityChanged;
+		}
+
+		public override void ViewWillDisappear(bool animated)
+		{
+			base.ViewWillDisappear(animated);
+			CrossConnectivity.Current.ConnectivityChanged += CrossConnectivity_Current_ConnectivityChanged;
+		}
+
+		void CrossConnectivity_Current_ConnectivityChanged(object sender, Plugin.Connectivity.Abstractions.ConnectivityChangedEventArgs e)
+		{
+			MessageService.ShowSimpleMessage(this, "Connection Event Detected", $"Connected: {e.IsConnected}");
 		}
 
 		public override void DidReceiveMemoryWarning()

@@ -11,15 +11,14 @@
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Models\" />
     <Folder Include="$(MSBuildThisFileDirectory)Services\" />
-    <Folder Include="$(MSBuildThisFileDirectory)App\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Services\BaseService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Song.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\SongService.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)App\Message.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\WeatherService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\ForecastDay.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\CurrentObservation.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\MessageService.cs" />
   </ItemGroup>
 </Project>

@@ -27,10 +27,8 @@ namespace EpocratesTraining.iOS
 			// Perform any additional setup after loading the view, typically from a nib.
 
 			var statusBarHeight = UIApplication.SharedApplication.StatusBarFrame.Height;
-			var displayWidth = View.Frame.Width;
-			var displayHeight = View.Frame.Height;
 
-			tableView = new UITableView(new CGRect(0, statusBarHeight + 100, displayWidth, displayHeight));
+			tableView = new UITableView(new CGRect(0, statusBarHeight + 100, View.Frame.Width, View.Frame.Height));
 			tableView.RegisterClassForCellReuse(typeof(UITableViewCell), "MyCell");
 			tableView.SeparatorStyle = UITableViewCellSeparatorStyle.None;
 
@@ -47,15 +45,13 @@ namespace EpocratesTraining.iOS
 				{
 					InvokeOnMainThread(() =>
 					{
-						var imageView = new UIImageView(new CGRect((displayWidth / 2) - 24,
-						                                           statusBarHeight + 35, 48, 48));
+						var imageView = new UIImageView(new CGRect((View.Frame.Width / 2) - 24, 100, 48, 48));
 
-						ImageService.Instance.LoadUrl(currentConditions.IconUrl).Into(imageView);
+						//ImageService.Instance.LoadUrl(currentConditions.IconUrl).Into(imageView);
+
+						imageView.Image = FromUrl(currentConditions.IconUrl);
 
 						View.AddSubview(imageView);
-
-						var label = new UILabel(new CGRect(52, 0, displayWidth - 52, 50));
-						label.Text = currentConditions.Weather;
 
 						var items = new List<Tuple<string, string>>();
 						items.Add(new Tuple<string, string>("Current conditions: ", currentConditions.Weather));
@@ -69,6 +65,13 @@ namespace EpocratesTraining.iOS
 					});
 				}
 			});
+		}
+
+		UIImage FromUrl(string uri)
+		{
+			using (var url = new NSUrl(uri))
+			using (var data = NSData.FromUrl(url))
+				return UIImage.LoadFromData(data);
 		}
 
 		public override void DidReceiveMemoryWarning()

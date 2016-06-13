@@ -3,6 +3,7 @@ using Android.Widget;
 using Android.OS;
 using Plugin.Connectivity;
 using Akavache;
+using EpocratesTraining.Services;
 
 namespace EpocratesTraining.Droid
 {
@@ -93,7 +94,7 @@ namespace EpocratesTraining.Droid
 
 		void CrossConnectivity_Current_ConnectivityChanged(object sender, Plugin.Connectivity.Abstractions.ConnectivityChangedEventArgs e)
 		{
-			Message.ShowSimpleMessage(this, "Connection Event Detected", $"Connected: {e.IsConnected}");
+			MessageService.ShowSimpleMessage(this, "Connection Event Detected", $"Connected: {e.IsConnected}");
 		}
 	}
 }
