@@ -34,7 +34,7 @@ namespace EpocratesTraining.iOS
 
 			View.AddSubview(tableView);
 
-			var loadingOverlay = new LoadingOverlay(UIScreen.MainScreen.Bounds);
+			var loadingOverlay = new LoadingOverlay(this.View.Bounds);
 			Add(loadingOverlay);
 
 			Task.Run(async () =>

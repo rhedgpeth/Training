@@ -21,7 +21,7 @@ namespace EpocratesTraining.iOS
 
 			base.ViewDidLoad();
 
-			var loadingOverlay = new LoadingOverlay(UIScreen.MainScreen.Bounds);
+			var loadingOverlay = new LoadingOverlay(this.View.Bounds);
 			Add(loadingOverlay);
 
 			//var statusBarHeight = UIApplication.SharedApplication.StatusBarFrame.Height;
